@@ -1,0 +1,176 @@
+(cd /home/hmn/Downloads/ont-guppy_6.4.6_linux64/ont-guppy/bin && guppy_basecaller --input_path /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/pod5 --save_path /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall --compress_fastq --config dna_r9.4.1_450bps_hac.cfg --barcode_kits SQK-16S024 -x "cuda:all")
+&&
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode01 && cat *gz > barcode01.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode01/barcode01.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode01 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode01/output_barcode01/barcode01.kraken2.assignments.tsv | cut -f3 -s >barcode01_taxid.txt | taxonkit lineage barcode01_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode01_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode01_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode01 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode01_Species_Abundance.tsv) 
+&&
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode02 && cat *gz > barcode02.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode02/barcode02.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode02 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode02/output_barcode02/barcode02.kraken2.assignments.tsv | cut -f3 -s >barcode02_taxid.txt | taxonkit lineage barcode02_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode02_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode02_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode02 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode02_Species_Abundance.tsv) 
+&&
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode03 && cat *gz > barcode03.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode03/barcode03.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode03 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode03/output_barcode03/barcode03.kraken2.assignments.tsv | cut -f3 -s >barcode03_taxid.txt | taxonkit lineage barcode03_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode03_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode03_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode03 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode03_Species_Abundance.tsv) 
+&&
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode04 && cat *gz > barcode04.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode04/barcode04.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode04 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode04/output_barcode04/barcode04.kraken2.assignments.tsv | cut -f3 -s >barcode04_taxid.txt | taxonkit lineage barcode04_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode04_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode04_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode04 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode04_Species_Abundance.tsv) 
+&&
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode05 && cat *gz > barcode05.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode05/barcode05.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode05 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode05/output_barcode05/barcode05.kraken2.assignments.tsv | cut -f3 -s >barcode05_taxid.txt | taxonkit lineage barcode05_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode05_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode05_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode05 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode05_Species_Abundance.tsv) 
+&&
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode06 && cat *gz > barcode06.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode06/barcode06.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode06 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode06/output_barcode06/barcode06.kraken2.assignments.tsv | cut -f3 -s >barcode06_taxid.txt | taxonkit lineage barcode06_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode06_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode06_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode06 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode06_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode07 && cat *gz > barcode07.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode07/barcode07.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode07 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode07/output_barcode07/barcode07.kraken2.assignments.tsv | cut -f3 -s >barcode07_taxid.txt | taxonkit lineage barcode07_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode07_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode07_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode07 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode07_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode08 && cat *gz > barcode08.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode08/barcode08.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode08 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode08/output_barcode08/barcode08.kraken2.assignments.tsv | cut -f3 -s >barcode08_taxid.txt | taxonkit lineage barcode08_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode08_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode08_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode08 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode08_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode09 && cat *gz > barcode09.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode09/barcode09.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode09 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode09/output_barcode09/barcode09.kraken2.assignments.tsv | cut -f3 -s >barcode09_taxid.txt | taxonkit lineage barcode09_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode09_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode09_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode09 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode09_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode10 && cat *gz > barcode10.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode10/barcode10.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode10 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode10/output_barcode10/barcode10.kraken2.assignments.tsv | cut -f3 -s >barcode10_taxid.txt | taxonkit lineage barcode10_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode10_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode10_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode10 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode10_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode11 && cat *gz > barcode11.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode11/barcode11.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode11 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode11/output_barcode11/barcode11.kraken2.assignments.tsv | cut -f3 -s >barcode11_taxid.txt | taxonkit lineage barcode11_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode11_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode11_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode11 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode11_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode12 && cat *gz > barcode12.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode12/barcode12.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode12 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode12/output_barcode12/barcode12.kraken2.assignments.tsv | cut -f3 -s >barcode12_taxid.txt | taxonkit lineage barcode12_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode12_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode12_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode12 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode12_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode13 && cat *gz > barcode13.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode13/barcode13.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode13 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode13/output_barcode13/barcode13.kraken2.assignments.tsv | cut -f3 -s >barcode13_taxid.txt | taxonkit lineage barcode13_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode13_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode13_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode13 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode13_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode14 && cat *gz > barcode14.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode14/barcode14.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode14 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode14/output_barcode14/barcode14.kraken2.assignments.tsv | cut -f3 -s >barcode14_taxid.txt | taxonkit lineage barcode14_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode14_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode14_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode14 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode14_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode15 && cat *gz > barcode15.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode15/barcode15.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode15 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode15/output_barcode15/barcode15.kraken2.assignments.tsv | cut -f3 -s >barcode15_taxid.txt | taxonkit lineage barcode15_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode15_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode15_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode15 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode15_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode16 && cat *gz > barcode16.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode16/barcode16.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode16 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode16/output_barcode16/barcode16.kraken2.assignments.tsv | cut -f3 -s >barcode16_taxid.txt | taxonkit lineage barcode16_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode16_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode16_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode16 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode16_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode17 && cat *gz > barcode17.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode17/barcode17.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode17 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode17/output_barcode17/barcode17.kraken2.assignments.tsv | cut -f3 -s >barcode17_taxid.txt | taxonkit lineage barcode17_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode17_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode17_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode17 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode17_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode18 && cat *gz > barcode18.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode18/barcode18.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode18 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode18/output_barcode18/barcode18.kraken2.assignments.tsv | cut -f3 -s >barcode18_taxid.txt | taxonkit lineage barcode18_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode18_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode18_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode18 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode18_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode19 && cat *gz > barcode19.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode19/barcode19.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode19 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode19/output_barcode19/barcode19.kraken2.assignments.tsv | cut -f3 -s >barcode19_taxid.txt | taxonkit lineage barcode19_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode19_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode19_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode19 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode19_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode20 && cat *gz > barcode20.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode20/barcode20.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode20 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode20/output_barcode20/barcode20.kraken2.assignments.tsv | cut -f3 -s >barcode20_taxid.txt | taxonkit lineage barcode20_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode20_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode20_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode20 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode20_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode21 && cat *gz > barcode21.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode21/barcode21.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode21 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode21/output_barcode21/barcode21.kraken2.assignments.tsv | cut -f3 -s >barcode21_taxid.txt | taxonkit lineage barcode21_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode21_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode21_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode21 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode21_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode22 && cat *gz > barcode22.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode22/barcode22.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode22 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode22/output_barcode22/barcode22.kraken2.assignments.tsv | cut -f3 -s >barcode22_taxid.txt | taxonkit lineage barcode22_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode22_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode22_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode22 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode22_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode23 && cat *gz > barcode23.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode23/barcode23.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode23 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode23/output_barcode23/barcode23.kraken2.assignments.tsv | cut -f3 -s >barcode23_taxid.txt | taxonkit lineage barcode23_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode23_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode23_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode23 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode23_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode24 && cat *gz > barcode24.fastq.gz && nextflow run epi2me-labs/wf-metagenomics --fastq /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode24/barcode24.fastq.gz -profile standard --min_len 800 --taxonomy /home/hmn/Downloads/new_taxdump.tar.gz --out_dir output_barcode24 && cat /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/barcode24/output_barcode24/barcode24.kraken2.assignments.tsv | cut -f3 -s >barcode24_taxid.txt | taxonkit lineage barcode24_taxid.txt --data-dir /home/hmn/Downloads/taxonkit | taxonkit reformat --data-dir /home/hmn/Downloads/taxonkit | cut -f 1,3 | sed 's/;/\t/g' > barcode24_taxonomy.tsv && awk '{print $3,$4,$5,$6,$7,$8,$9}' barcode24_taxonomy.tsv | sort | uniq -c | cat | sed 's/^[ \t]*//' | sort -f -rn | awk '
+        NR > max { max=NR }
+        { tot+=$1; v[NR]=$1; d[NR]=$2" "$3" "$4" "$5" "$6" "$7" "$8 }
+        END { for (i=1; i<=max; i++) { print v[i]*100/tot,v[i],d[i] } }
+'| awk '{print $1+0,$2,$3,$4,$5,$6,$7,$8,$9}' OFMT="%.3f" | awk 'NF>8' | awk 'NR>1 { print $1,$2,$3,$4,$5,$6,$7,$8"-"$9 }' | sed '1i %Abd_barcode24 Abundance Phylum Class Order Family Genus Species' | awk '{print $3,$4,$5,$6,$7,$8,$1}' >barcode24_Species_Abundance.tsv) ;
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass && mkdir Merged_Microbial_Profile && ls -d */ | xargs -I {} bash -c "cd '{}' && mv *Species_Abundance.tsv /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/Merged_Microbial_Profile")
+&&
+(cd /home/hmn/work/Amplicon/Run013_Amp_22_19032024/Data/SeqData/basecall/pass/Merged_Microbial_Profile && awk '
+{
+  if(!a[FILENAME]++){
+     file[++count]=FILENAME
+  }
+  b[$1 OFS $2 OFS $3 OFS $4 OFS $5 OFS $6 OFS FILENAME]=$NF
+  c[$1 OFS $2 OFS $3 OFS $4 OFS $5 OFS $6]++
+  if(!d[$1 OFS $2 OFS $3 OFS $4 OFS $5 OFS $6]++){
+    e[++count1]=$1 OFS $2 OFS $3 OFS $4 OFS $5 OFS $6
+  }
+}
+END{
+  for(i=1;i<=length(c);i++){
+    printf("%s ",e[i])
+    for(j=1;j<=count;j++){
+      printf("%s %s",(b[e[i] OFS file[j]]!=""?b[e[i] OFS file[j]]:0),j==count?ORS:OFS)
+    }
+  }
+}
+' *.tsv | sed 's/[ ][ ]*/ /g' | sed '2,${/Family/d;}' >merged_DiversityData.tsv)
+													
+
+
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
